@@ -1,0 +1,88 @@
+<!-- config.component.html -->
+<div class="container p-0">
+  <h1 class="h3 mb-3">Add Config</h1>
+  <div class="card">
+    <div class="row g-0">
+      <!-- Bot Config List Sidebar -->
+      <div class="col-12 col-lg-5 col-xl-3 border-end">
+        <div class="px-4 d-none d-md-block">
+          <div class="d-flex align-items-center">
+            <div class="flex-grow-1 text-center">
+              <h3>History Config List</h3>
+            </div>
+          </div>
+        </div>
+        <div class="scrollable-list" style="max-height: 400px; overflow-y: auto;">
+          <!-- Loop through historyList -->
+          <div *ngFor="let config of historyList" class="list-group border">
+            <a [routerLink]="['/bot-details', config.id]" class="list-group-item border list-group-item-action d-flex justify-content-between align-items-center">
+              <i class="fas fa-robot bot-logo me-2"></i>
+              <span class="flex-grow-1">{{ config.botName }}</span>
+              <span class="badge bg-secondary">{{ config.provider }}</span>
+            </a>
+            <button (click)="deleteConfig(config.id)" class="btn btn-danger btn-sm">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="col-12 col-lg-7 col-xl-9">
+        <div class="position-relative">
+          <div class="p-4">
+            <!-- Select Bot Provider Section -->
+            <div class="mb-3">
+              <label for="botProvider" class="form-label">Select Bot Provider*</label>
+              <select id="botProvider" class="form-select" [(ngModel)]="botProvider">
+                <option value="" disabled selected>Select a provider</option>
+                <option value="aws-lex-v1">Amazon AWS Lex V1</option>
+                <option value="aws-lex-v2">Amazon AWS Lex V2</option>
+                <option value="cxone-smartassist">CXone SmartAssist</option>
+                <!-- Add additional provider options similarly -->
+              </select>
+            </div>
+
+            <!-- App Name and Config Inputs -->
+            <div class="mb-3">
+              <label for="appName" class="form-label">VIRTUAL AGENT (BOT) NAME *</label>
+              <input type="text" class="form-control" id="appName" [(ngModel)]="appName" />
+            </div>
+            <div class="mb-3">
+              <label for="configVersion" class="form-label">Config Version*</label>
+              <select id="configVersion" class="form-select" [(ngModel)]="configVersion">
+                <option value="" disabled selected>Select a version</option>
+                <option value="config1-v1">1.0.0</option>
+                <option value="config1-v2">2.0.0</option>
+                <option value="config1-v3">3.0.0</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="JsonServiceAccount" class="form-label">JSON SERVICE ACCOUNT *</label>
+              <input type="text" class="form-control" id="JsonServiceAccount" [(ngModel)]="JsonServiceAccount" />
+            </div>
+            <div class="mb-3">
+              <label for="Region" class="form-label">REGION *</label>
+              <input type="text" class="form-control" id="Region" [(ngModel)]="Region" />
+            </div>
+            <div class="mb-3">
+              <label for="Language" class="form-label">LANGUAGE *</label>
+              <select id="Language" class="form-select" [(ngModel)]="Language">
+                <option value="" disabled selected>Select a language</option>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="zh">Chinese</option>
+                <!-- Add additional languages similarly -->
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Save Button -->
+        <div class="flex-grow-0 py-3 px-4 border-top">
+          <button (click)="saveConfig()" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

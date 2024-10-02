@@ -1,0 +1,30 @@
+<div class="chat-container">
+  <div class="header">
+    <img src="assets/avatar.webp" alt="Bot Avatar" class="avatar bot-avatar">
+    <div class="bot-info">
+      <h4 class="bot-name">ChatBot </h4>
+      <span class="online-status">Online</span>
+    </div>
+  </div>
+
+  <div class="messages">
+    <div *ngFor="let message of messages" class="message-wrapper" [ngClass]="{ 'user-wrapper': message.sender === 'user', 'bot-wrapper': message.sender === 'bot' }">
+
+      <div class="message-bubble" [ngClass]="{ 'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot' }">
+        <p>{{ message.text }}</p>
+      </div>
+
+      <!-- Bot Avatar - Move this below the bot message bubble -->
+      <img *ngIf="message.sender === 'bot'" src="assets/avatar.webp" alt="Bot Avatar" class="avatar bot-avatar">
+      
+      <!-- User Avatar -->
+      <img *ngIf="message.sender === 'user'" src="assets/user avatar.avif" alt="User Avatar" class="avatar user-avatar">
+    </div>
+  </div>
+
+  <div class="input-container">
+    <input [(ngModel)]="newMessage" placeholder="Type a message..." class="form-control message-input" />
+    <button (click)="sendMessage()" class="btn btn-primary">Send</button>
+    <button (click)="endChat()" class="btn btn-danger">End Chat</button>
+  </div>
+</div>

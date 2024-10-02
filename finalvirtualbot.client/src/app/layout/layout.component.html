@@ -1,0 +1,58 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd; border-radius: 0;">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#" style="color: #007bff;">Chat-App</a>
+
+    <!-- Toggle for mobile view -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <!-- Home Link -->
+        <li class="nav-item active">
+          <a class="nav-link" href="#" style="color: #007bff;">Home</a>
+        </li>
+
+        <!-- About Us Link -->
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="color: #007bff;">About Us</a>
+        </li>
+      </ul>
+
+      <!-- Right-aligned links -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="color: #007bff;">
+            <span class="glyphicon glyphicon-user" style="margin-right: 5px;"></span>
+            {{ loggedUser?.name }}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" style="color: #007bff;">
+            <span class="glyphicon glyphicon-user" style="margin-right: 5px;"></span>
+            Sign Up
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" (click)="onLogOut()" style="color: #007bff;">
+            <span class="glyphicon glyphicon-log-in" style="margin-right: 5px;"></span>
+            LogOut
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Router Outlet for Angular -->
+<div class="container mt-4">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Bootstrap JS (Optional) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>

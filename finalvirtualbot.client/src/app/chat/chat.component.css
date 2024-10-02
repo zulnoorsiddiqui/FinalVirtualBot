@@ -1,0 +1,145 @@
+.chat-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f7f7f7;
+}
+
+.message-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.user-wrapper {
+  justify-content: flex-end;
+}
+
+.bot-wrapper {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: 60%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 14px;
+}
+
+.user-message {
+  background-color: #007bff;
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.bot-message {
+  background-color: #6c757d;
+  color: white;
+  border-bottom-left-radius: 0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.user-avatar {
+  order: 2; /* Display avatar after the message bubble for user */
+}
+
+.bot-avatar {
+  order: 1; /* Display avatar before the message bubble for bot */
+}
+
+.input-container {
+  display: flex;
+  padding: 10px;
+  background-color: #e9ecef;
+}
+
+.message-input {
+  flex: 1;
+  border-radius: 20px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+button {
+  border-radius: 20px;
+  padding: 10px 15px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ccc;
+}
+
+.bot-info {
+  margin-left: 10px;
+}
+
+.bot-name {
+  margin: 0;
+  font-size: 16px;
+}
+
+.online-status {
+  color: green;
+  font-size: 12px;
+}
+
+.message-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.user-wrapper {
+  justify-content: flex-end;
+}
+
+.bot-wrapper {
+  justify-content: flex-start;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.user-avatar {
+  order: 2; /* Display avatar after the message bubble for user */
+}
+
+.bot-avatar {
+  order: 1; /* Display avatar before the message bubble for bot */
+}
+
+.payload-text {
+  display: block; /* Ensure the payload text is treated as a block for hover functionality */
+  font-size: 12px; /* Smaller font size for payload */
+  color: #666; /* Lighter color for distinction */
+  margin-top: 5px; /* Space above the payload text */
+}
+
+.message-bubble:hover .payload-text {
+  color: #000; /* Change color on hover for better visibility */
+}
+

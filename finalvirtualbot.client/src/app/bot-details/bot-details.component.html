@@ -1,0 +1,75 @@
+<div class="container mt-5">
+
+  <!-- Page Header and Chat Button -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="display-5">Edit Bot Configuration</h1>
+    <button type="button" class="btn btn-success btn-lg chat-with-bot-btn" (click)="navigateToChat()">Chat with Bot</button>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div class="card shadow-lg p-4" style="width: 50%;">
+      <form>
+        <!-- Select Bot Provider -->
+        <div class="mb-3">
+          <label for="botProvider" class="form-label">Select Bot Provider*</label>
+          <select id="botProvider" class="form-select" [(ngModel)]="botConfig.provider" name="provider">
+            <option value="" disabled>Select a provider</option>
+            <option value="aws-lex-v1">Amazon AWS Lex V1</option>
+            <option value="aws-lex-v2">Amazon AWS Lex V2</option>
+            <option value="cxone-smartassist">CXone SmartAssist</option>
+          </select>
+        </div>
+
+        <!-- Bot Name -->
+        <div class="mb-3">
+          <label for="appName" class="form-label">Virtual Agent (Bot) Name *</label>
+          <input type="text" class="form-control" id="appName" [(ngModel)]="botConfig.botName" name="botName" placeholder="Enter bot name" />
+        </div>
+
+        <!-- Config Version -->
+        <div class="mb-3">
+          <label for="configVersion" class="form-label">Config Version</label>
+          <select id="configVersion" class="form-select" [(ngModel)]="botConfig.configVersion" name="configVersion">
+            <option value="" disabled>Select a version</option>
+            <option value="config1-v1">1.0.0</option>
+            <option value="config1-v2">2.0.0</option>
+            <option value="config1-v3">3.0.0</option>
+          </select>
+        </div>
+
+        <!-- JSON Service Account -->
+        <div class="mb-3">
+          <label for="JsonServiceAccount" class="form-label">JSON Service Account *</label>
+          <input type="text" class="form-control" id="JsonServiceAccount" [(ngModel)]="botConfig.jsonServiceAccount" name="jsonServiceAccount" placeholder="Enter JSON service account" />
+        </div>
+
+        <!-- Region -->
+        <div class="mb-3">
+          <label for="Region" class="form-label">Region *</label>
+          <input type="text" class="form-control" id="Region" [(ngModel)]="botConfig.region" name="region" placeholder="Enter region" />
+        </div>
+
+        <!-- Language -->
+        <div class="mb-3">
+          <label for="Language" class="form-label">Language *</label>
+          <select id="Language" class="form-select" [(ngModel)]="botConfig.language" name="language">
+            <option value="" disabled>Select a language</option>
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="zh">Chinese</option>
+          </select>
+        </div>
+
+        <!-- Save and Cancel Buttons -->
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-secondary btn-lg" (click)="Back()">Back</button>
+          <button type="button" class="btn btn-primary btn-lg" (click)="saveConfig()">Save</button>
+          
+          
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

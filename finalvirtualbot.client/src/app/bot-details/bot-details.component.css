@@ -1,0 +1,19 @@
+/* Larger Button and Blinking Effect */
+.chat-with-bot-btn {
+    font-size: 1.5rem; /* Larger font size */
+    padding: 10px 20px; /* Larger padding for the button */
+    animation: blink 1s infinite; /* Continuous blinking */
+}
+
+/* Blinking keyframes animation */
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
