@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 // Define BotConfig interface to ensure type safety
 interface BotConfig {
@@ -18,51 +19,82 @@ interface BotConfig {
   providedIn: 'root',
 })
 export class BotConfigService {
-  private apiUrl = 'https://localhost:7077/api/BotConfig';
+  private apiUrl = 'http://localhost:8080/api/BotConfig';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object // Inject platform to check browser/server
+  ) { }
 
-  // Get all bot configurations
+  // Get all bot configurations (only in browser)
   getAllBotConfigs(): Observable<BotConfig[]> {
-    return this.http.get<BotConfig[]>(this.apiUrl).pipe(
-      map((response: BotConfig[]) => response || []),
-      catchError(this.handleError)
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      return this.http.get<BotConfig[]>(this.apiUrl).pipe(
+        map((response: BotConfig[]) => response || []),
+        catchError(this.handleError)
+      );
+    } else {
+      return throwError('API calls not supported during SSR');
+    }
   }
 
-  // Get a specific bot configuration by ID
+  // Get a specific bot configuration by ID (only in browser)
   getBotConfigById(id: string): Observable<BotConfig> {
-    return this.http.get<BotConfig>(`${this.apiUrl}/${id}`).pipe(
-      catchError(this.handleError)
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      return this.http.get<BotConfig>(`${this.apiUrl}/${id}`).pipe(
+        catchError(this.handleError)
+      );
+    } else {
+      return throwError('API calls not supported during SSR');
+    }
   }
 
-  // Create a new bot configuration
+  // Create a new bot configuration (only in browser)
   createBotConfig(config: BotConfig): Observable<BotConfig> {
-    return this.http.post<BotConfig>(this.apiUrl, config).pipe(
-      catchError(this.handleError)
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      return this.http.post<BotConfig>(this.apiUrl, config).pipe(
+        catchError(this.handleError)
+      );
+    } else {
+      return throwError('API calls not supported during SSR');
+    }
   }
 
-  // Update an existing bot configuration by ID
+  // Update an existing bot configuration by ID (only in browser)
   updateBotConfig(id: string, config: BotConfig): Observable<BotConfig> {
-    return this.http.put<BotConfig>(`${this.apiUrl}/${id}`, config).pipe(
-      catchError(this.handleError)
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      return this.http.put<BotConfig>(`${this.apiUrl}/${id}`, config).pipe(
+        catchError(this.handleError)
+      );
+    } else {
+      return throwError('API calls not supported during SSR');
+    }
   }
 
-  // Delete a bot configuration by ID
+  // Delete a bot configuration by ID (only in browser)
   deleteBotConfig(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
-      catchError(this.handleError)
-    );
+    if (isPlatformBrowser(this.platformId)) {
+      return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+        catchError(this.handleError)
+      );
+    } else {
+      return throwError('API calls not supported during SSR');
+    }
   }
 
   // Handle errors globally for this service
   private handleError(error: HttpErrorResponse): Observable<never> {
-    console.error('BotConfigService Error:', error);
-    // Customize the error message based on status or response
-    const errorMessage = error.error.message || 'An unknown error occurred.';
-    return throwError(errorMessage);
+    let errorMessage: string;
+
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred.
+      errorMessage = `Client-side error: ${error.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      errorMessage = `Server error (status ${error.status}): ${error.message}`;
+    }
+
+    console.error('BotConfigService Error:', errorMessage);
+    return throwError(errorMessage || 'An unknown error occurred.');
   }
 }

@@ -53,23 +53,21 @@ describe('ChatComponent', () => {
     expect(mockWebSocketService.connect).toHaveBeenCalled();
   });
 
-
-
   it('should send a message via WebSocket and add it to the messages array', () => {
     component.newMessage = 'Hello';
     component.sendMessage();
-    
+
     expect(component.messages.length).toBe(1);
-    expect(component.messages[0].text).toBe('Hello'); // Updated to match the structure
-    expect(component.messages[0].sender).toBe('user'); // Check sender
+    expect(component.messages[0].text).toBe('Hello');
+    expect(component.messages[0].sender).toBe('user');
     expect(mockWebSocketService.sendMessage).toHaveBeenCalledWith('Hello');
-    expect(component.newMessage).toBe(''); // Ensure message input is cleared
+    expect(component.newMessage).toBe('');
   });
 
   it('should not send a message if the input is empty or just whitespace', () => {
     component.newMessage = '   ';
     component.sendMessage();
-    
+
     expect(component.messages.length).toBe(0);
     expect(mockWebSocketService.sendMessage).not.toHaveBeenCalled();
   });
@@ -77,8 +75,8 @@ describe('ChatComponent', () => {
   it('should end chat by clearing sessionId and navigating to config-component', () => {
     component.endChat();
 
-    expect(localStorage.getItem('chatSessionId')).toBeNull(); 
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['/config-component']); // Redirected to config page
+    expect(localStorage.getItem('chatSessionId')).toBeNull();
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/config-component']);
   });
 
   it('should disconnect the WebSocket when component is destroyed', async () => {

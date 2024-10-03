@@ -35,7 +35,7 @@ describe('AuthService', () => {
       expect(res.message).toBe('User registered successfully');
     });
 
-    const req = httpMock.expectOne('https://localhost:7136/api/v1/authenticate/register');
+    const req = httpMock.expectOne('http://localhost:8080/api/v1/authenticate/register');
     expect(req.request.method).toBe('POST');
     req.flush(response);
   });
@@ -53,7 +53,7 @@ describe('AuthService', () => {
       expect(res.accessToken).toBe('token123');
     });
 
-    const req = httpMock.expectOne('https://localhost:7136/api/v1/authenticate/login');
+    const req = httpMock.expectOne('http://localhost:8080/api/v1/authenticate/login');
     expect(req.request.method).toBe('POST');
     req.flush(response);
   });

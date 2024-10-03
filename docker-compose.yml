@@ -1,0 +1,16 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: FinalVirtualBot.Server/Dockerfile
+    ports:
+        - "8080:8080"
+        - "8081:8081"
+
+  client:
+    build:
+      context: .
+      dockerfile: finalvirtualbot.client/Dockerfile
+    ports:
+        - "4200:4200"

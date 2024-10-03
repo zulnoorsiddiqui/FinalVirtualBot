@@ -72,14 +72,26 @@ describe('BotDetailsComponent', () => {
   it('should display an error if loadBotConfig fails', () => {
     mockBotConfigService.getBotConfigById.and.returnValue(throwError(() => new Error('Load failed')));
 
-    spyOn(window, 'alert');
+    spyOn(console, 'error'); // Spy on console.error to verify error logging
     component.ngOnInit();
 
-    expect(window.alert).toHaveBeenCalledWith('Failed to load bot configuration.');
+    expect(console.error).toHaveBeenCalledWith('Error fetching bot configuration:', jasmine.any(Object));
   });
 
   it('should update bot configuration and navigate to config page on save', () => {
+    // Set component properties to test update
+    component.botConfig = {
+      id: 'mock-id', // Mock the ID to be used in update
+      botName: 'Updated Bot',
+      provider: 'aws-lex-v2',
+      configVersion: '1.0.1',
+      jsonServiceAccount: 'updated-account',
+      region: 'us-east-1',
+      language: 'fr'
+    };
+
     component.saveConfig();
+
     expect(mockBotConfigService.updateBotConfig).toHaveBeenCalledWith('mock-id', component.botConfig);
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/config-component']);
   });
@@ -88,10 +100,11 @@ describe('BotDetailsComponent', () => {
     const mockError = new Error('Update failed');
     mockBotConfigService.updateBotConfig.and.returnValue(throwError(() => mockError));
 
-    spyOn(window, 'alert');
+    spyOn(console, 'error'); // Spy on console.error to verify error logging
     component.saveConfig();
-    expect(window.alert).toHaveBeenCalledWith('Failed to update the configuration.');
-    expect(mockRouter.navigate).not.toHaveBeenCalled();
+
+    expect(console.error).toHaveBeenCalledWith('Error updating configuration:', jasmine.any(Object));
+    expect(mockRouter.navigate).not.toHaveBeenCalled(); // Ensure navigation doesn't happen on error
   });
 
   it('should navigate to chat component on clicking "Chat with Bot" button', () => {

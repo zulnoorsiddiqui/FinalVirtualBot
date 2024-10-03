@@ -31,7 +31,7 @@ export interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = 'https://localhost:7077/api/v1/authenticate'; // Adjust API URL if needed
+  private readonly apiUrl = 'http://localhost:8080/api/v1/authenticate'; // Adjust API URL if needed
  
   constructor(private http: HttpClient) {}
 

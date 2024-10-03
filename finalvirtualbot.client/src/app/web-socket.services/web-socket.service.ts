@@ -27,7 +27,7 @@ export class WebSocketService {
         return;
       }
 
-      this.socket = new WebSocket('https://localhost:7077/ws'); // Use 'ws' instead of 'http'
+      this.socket = new WebSocket('http://localhost:8080/ws'); // Use 'ws' instead of 'http'
 
       this.socket.onopen = () => {
         this.isConnected = true;

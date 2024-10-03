@@ -32,7 +32,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddSingleton<DialogflowService>(provider =>
 {
 
-    return new DialogflowService("task-agent-xoqj", @"C:\Users\Interact CX\Downloads\credential.json");
+    return new DialogflowService("task-agent-xoqj", @"Credential.json");
 });
 
 // Register the DialogflowService using the factory(concept of FACTORY DI as given in task)
@@ -45,7 +45,7 @@ builder.Services.AddSingleton<IDialogflowService>(provider =>
 // Register MongoDB client and database (establishing the connection throughout the application)
 builder.Services.AddSingleton<IMongoClient>(sp =>
 {
-    return new MongoClient("mongodb://localhost:27017");
+    return new MongoClient("mongodb+srv://zulnoor123:zulnoor123@zulnoor.z5zlegq.mongodb.net/?retryWrites=true&w=majority&appName=ZULNOOR");
 });
 
 builder.Services.AddScoped<IMongoDatabase>(sp =>
@@ -63,7 +63,7 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
 {
     MongoDbSettings = new MongoDbSettings
     {
-        ConnectionString = "mongodb://localhost:27017",
+        ConnectionString = "mongodb+srv://zulnoor123:zulnoor123@zulnoor.z5zlegq.mongodb.net/?retryWrites=true&w=majority&appName=ZULNOOR",
         DatabaseName = "CrudOperation"
     },
     IdentityOptionsAction = options =>
@@ -185,7 +185,7 @@ async Task HandleWebSocketConnection(WebSocket webSocket)
         Console.WriteLine("Received message: " + receivedMessage);
 
         // Step 2: Use DialogflowService to process the received message
-        var dialogflowService = new DialogflowService("task-agent-xoqj", @"C:\Users\Interact CX\Downloads\credential.json");
+        var dialogflowService = new DialogflowService("task-agent-xoqj", @"Credential.json");
         var sessionId = "SESSION_ID"; // You should generate or manage session IDs appropriately
         var dialogflowResponse = dialogflowService.DetectIntent(sessionId, receivedMessage);
 

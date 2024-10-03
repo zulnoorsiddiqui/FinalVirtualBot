@@ -5,15 +5,16 @@ FROM node:20 AS build
 WORKDIR /app
  
 # Copy package.json and install dependencies
+COPY finalvirtualbot.client/package*.json ./
 COPY package*.json ./
 RUN npm install
+RUN npm install -g @angular/cli
  
 # Copy the rest of the application
-COPY . .
+COPY finalvirtualbot.client/ .
  
 # Expose the port Angular app runs on
 EXPOSE 4200
  
 # Set default command to serve the Angular app
-CMD ["npm", "run", "start"]
- 
+CMD [ "ng", "serve", "--host", "0.0.0.0" ]

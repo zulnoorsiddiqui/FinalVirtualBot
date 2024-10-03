@@ -48,4 +48,12 @@
     <Folder Include="Repository\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Interact CX\source\repos\FinalVirtualBot\FinalVirtualBot.Server\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Interact CX\source\repos\FinalVirtualBot\FinalVirtualBot.Server\.editorconfig" />
+  </ItemGroup>
+
 </Project>

@@ -13,8 +13,8 @@ describe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         CommonModule,
-        RouterTestingModule, 
-        DashboardComponent,  
+        RouterTestingModule,
+        DashboardComponent,
       ],
     }).compileComponents();
 
@@ -23,45 +23,45 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
   });
 
-  //T1: Creation
+  //creation of component
   it('should create the DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  //T2: Render elemenent sucessfullly
+  // render title
   it('should render the title "Welcome to Application Dashboard"', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const title = compiled.querySelector('h2')?.textContent;
     expect(title).toContain('Welcome to Application Dashboard');
   });
 
-  //T3: Routing outlet
+  // test for router outlet
   it('should have a router-outlet', () => {
     const routerOutlet = fixture.debugElement.query(By.directive(RouterOutlet));
-    expect(routerOutlet).not.toBeNull(); 
+    expect(routerOutlet).not.toBeNull();
   });
 
-  //T4: Chat Button should route correctly
+  // testing chat button
   it('should have a "Chat" button with the correct routerLink', () => {
     const button = fixture.debugElement.query(By.css('button[routerLink="/chat-component"]'));
     expect(button).not.toBeNull();
     expect(button.attributes['routerLink']).toBe('/chat-component');
   });
 
-  // T5: AddBot BUTTON to route correctly
+  //  test of addbot button
   it('should have an "AddBOT" button with the correct routerLink', () => {
     const button = fixture.debugElement.query(By.css('button[routerLink="/config-component"]'));
     expect(button).not.toBeNull();
     expect(button.attributes['routerLink']).toBe('/config-component');
   });
 
-  // T6: Should apply active class to active buttons
+  // active button test
   it('should add the "active" class to the active routerLink', () => {
     const activeLinks = fixture.debugElement.queryAll(By.css('button.active'));
     expect(activeLinks.length).toBe(0);
   });
 
-  // T7: Should navigate to ChatComponent when chat button is clicked
+  // navigation of chat button
   it('should navigate to ChatComponent when "Chat" button is clicked', async () => {
     const chatButton = fixture.debugElement.query(By.css('button[routerLink="/chat-component"]'));
     chatButton.triggerEventHandler('click', null);
@@ -70,12 +70,38 @@ describe('DashboardComponent', () => {
     expect(routerLink['commands']).toEqual(['/chat-component']);
   });
 
-  // T8: Should navigate to ConfigComponent when AddBOT button is clicked
+  //  Should navigate to ConfigComponent when AddBOT button is clicked
   it('should navigate to ConfigComponent when "AddBOT" button is clicked', async () => {
     const configButton = fixture.debugElement.query(By.css('button[routerLink="/config-component"]'));
     configButton.triggerEventHandler('click', null);
     fixture.detectChanges();
     const routerLink = configButton.injector.get(RouterLinkWithHref);
     expect(routerLink['commands']).toEqual(['/config-component']);
+  });
+
+  //  Should add script to the document in ngOnInit
+  it('should add the script to the document body in ngOnInit', () => {
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    const scriptElements = document.querySelectorAll('script');
+    const addedScript = Array.from(scriptElements).find(script => script.src.includes('livechat-static-de-na1.niceincontact.com'));
+
+    expect(addedScript).toBeTruthy();
+    expect(addedScript?.async).toBe(true);
+  });
+
+  //  Should remove the script from the document in ngOnDestroy
+  it('should remove the script from the document body in ngOnDestroy', () => {
+    component.ngOnInit(); // Simulate script addition in ngOnInit
+    fixture.detectChanges();
+
+    component.ngOnDestroy(); // Simulate component destruction
+    fixture.detectChanges();
+
+    const scriptElements = document.querySelectorAll('script');
+    const removedScript = Array.from(scriptElements).find(script => script.src.includes('livechat-static-de-na1.niceincontact.com'));
+
+    expect(removedScript).toBeUndefined(); // The script should be removed
   });
 });

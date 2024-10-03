@@ -46,11 +46,11 @@ export class ConfigComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error saving configuration:', error);
-          alert('Failed to save the configuration.');
+         // alert('Failed to save the configuration.');
         }
       });
     } else {
-      alert('Please fill in all required fields.');
+      //alert('Please fill in all required fields.');
     }
   }
 
@@ -65,7 +65,7 @@ export class ConfigComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading configurations:', error);
-        alert('Failed to load bot configurations.');
+        //alert('Failed to load bot configurations.');
       }
     });
   }
@@ -92,7 +92,7 @@ export class ConfigComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error deleting configuration:', error);
-          alert('Failed to delete the configuration.');
+         // alert('Failed to delete the configuration.');
         }
       });
     }
