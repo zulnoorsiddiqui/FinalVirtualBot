@@ -1,98 +1,101 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using UserAuthentication.Models;
-using UserAuthentication.Repository;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using FinalVirtualBot.Server.Models;
+using FinalVirtualBot.Server.Repository;
 
-[ApiController]
-[Route("api/[controller]")]
-public class BotConfigController : ControllerBase
+using FinalVirtualBot.Server.Dtos;
+
+namespace FinalVirtualBot.Server.Controllers
 {
-    private readonly IBotConfigRepository _botConfigRepository;
-
-    public BotConfigController(IBotConfigRepository botConfigRepository)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class BotConfigController : ControllerBase
     {
-        _botConfigRepository = botConfigRepository;
-    }
+        private readonly IBotConfigRepository _botConfigRepository;
 
-    [HttpGet]
-
-    public async Task<ActionResult<List<BotConfigDTO>>> GetAll()
-    {
-        var botConfigs = await _botConfigRepository.GetAllAsync();
-        return Ok(botConfigs);
-    }
-
-    [HttpGet("{id}")]
-    public async Task<ActionResult<BotConfigDTO>> GetById(string id)
-    {
-        var botConfig = await _botConfigRepository.GetByIdAsync(id);
-        if (botConfig == null)
-            return NotFound();
-        return Ok(botConfig);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] BotConfigDTO botConfigDto)
-    {
-       
-        var botConfig = new BotConfig
-        { //configuration of bot through botDtos
-            BotName = botConfigDto.BotName,
-            Provider = botConfigDto.Provider,
-            ConfigVersion = botConfigDto.ConfigVersion,
-            JsonServiceAccount = botConfigDto.JsonServiceAccount,
-            Region = botConfigDto.Region,
-            Language = botConfigDto.Language
-        };
-        //saving to database
-        await _botConfigRepository.CreateAsync(botConfig);
-
-        //response object jab bot configure hojyega
-        var response = new
+        public BotConfigController(IBotConfigRepository botConfigRepository)
         {
-            Message = "Bot configuration created successfully.",
-            BotConfig = botConfig
-        };
+            _botConfigRepository = botConfigRepository;
+        }
 
-        // Return the response
-        return CreatedAtAction(
-            nameof(GetById),
-            new { id = botConfig.Id },
-            response);
-    }
+        [HttpGet]
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, [FromBody] BotConfigDTO botConfigDto)
-    {
-        var existingBotConfig = await _botConfigRepository.GetByIdAsync(id);
-        if (existingBotConfig == null)
-            return NotFound();
-
-        var updatedBotConfig = new BotConfig
+        public async Task<ActionResult<List<BotConfigDTO>>> GetAll()
         {
-            Id = id,
-            BotName = botConfigDto.BotName,
-            Provider = botConfigDto.Provider,
-            ConfigVersion = botConfigDto.ConfigVersion,
-            JsonServiceAccount = botConfigDto.JsonServiceAccount,
-            Region = botConfigDto.Region,
-            Language = botConfigDto.Language
-        };
+            var botConfigs = await _botConfigRepository.GetAllAsync();
+            return Ok(botConfigs);
+        }
 
-        await _botConfigRepository.UpdateAsync(id, updatedBotConfig);
-        return NoContent();
-    }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<BotConfigDTO>> GetById(string id)
+        {
+            var botConfig = await _botConfigRepository.GetByIdAsync(id);
+            if (botConfig == null)
+                return NotFound();
+            return Ok(botConfig);
+        }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
-    {
-        var botConfig = await _botConfigRepository.GetByIdAsync(id);
-        if (botConfig == null)
-            return NotFound();
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] BotConfigDTO botConfigDto)
+        {
 
-        await _botConfigRepository.DeleteAsync(id);
-        return NoContent();
+            var botConfig = new BotConfig
+            { //configuration of bot through botDtos
+                BotName = botConfigDto.BotName,
+                Provider = botConfigDto.Provider,
+                ConfigVersion = botConfigDto.ConfigVersion,
+                JsonServiceAccount = botConfigDto.JsonServiceAccount,
+                Region = botConfigDto.Region,
+                Language = botConfigDto.Language
+            };
+            //saving to database
+            await _botConfigRepository.CreateAsync(botConfig);
+
+            //response object jab bot configure hojyega
+            var response = new
+            {
+                Message = "Bot configuration created successfully.",
+                BotConfig = botConfig
+            };
+
+            // Return the response
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = botConfig.Id },
+                response);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, [FromBody] BotConfigDTO botConfigDto)
+        {
+            var existingBotConfig = await _botConfigRepository.GetByIdAsync(id);
+            if (existingBotConfig == null)
+                return NotFound();
+
+            var updatedBotConfig = new BotConfig
+            {
+                Id = id,
+                BotName = botConfigDto.BotName,
+                Provider = botConfigDto.Provider,
+                ConfigVersion = botConfigDto.ConfigVersion,
+                JsonServiceAccount = botConfigDto.JsonServiceAccount,
+                Region = botConfigDto.Region,
+                Language = botConfigDto.Language
+            };
+
+            await _botConfigRepository.UpdateAsync(id, updatedBotConfig);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var botConfig = await _botConfigRepository.GetByIdAsync(id);
+            if (botConfig == null)
+                return NotFound();
+
+            await _botConfigRepository.DeleteAsync(id);
+            return NoContent();
+        }
     }
 }

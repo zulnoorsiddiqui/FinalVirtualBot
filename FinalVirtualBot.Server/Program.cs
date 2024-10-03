@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using UserAuthentication.Services;
-using UserAuthentication.Models;
+
+
 using MongoDB.Driver;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -16,6 +16,9 @@ using System.Net.WebSockets;
 using UserAuthentication.Repository;
 using System.Text.Json;
 using Google.Api;
+using FinalVirtualBot.Server.Services;
+using FinalVirtualBot.Server.Repository;
+using FinalVirtualBot.Server.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);

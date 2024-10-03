@@ -1,4 +1,4 @@
-﻿namespace UserAuthentication.Services
+﻿namespace FinalVirtualBot.Server.Services
 {
     public static class DialogflowServiceFactory
     {

@@ -1,4 +1,4 @@
-﻿namespace UserAuthentication.Dtos
+﻿namespace FinalVirtualBot.Server.Dtos
 {
     public class RegisterResponse
     {

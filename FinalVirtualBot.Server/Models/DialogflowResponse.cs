@@ -1,4 +1,4 @@
-﻿namespace UserAuthentication.Models
+﻿namespace FinalVirtualBot.Server.Models
 {
     public class DialogflowResponse
     {

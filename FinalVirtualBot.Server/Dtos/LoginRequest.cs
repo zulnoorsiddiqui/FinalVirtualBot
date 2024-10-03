@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UserAuthentication.Dtos
+namespace FinalVirtualBot.Server.Dtos
 {
     public class LoginRequest
     {

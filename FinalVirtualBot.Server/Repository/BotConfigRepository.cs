@@ -1,5 +1,7 @@
 ﻿namespace UserAuthentication.Repository
 {
+    using FinalVirtualBot.Server.Models;
+    using FinalVirtualBot.Server.Repository;
     using MongoDB.Driver;
     using System.Collections.Generic;
     using System.Threading.Tasks;

@@ -5,12 +5,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
-using UserAuthentication.Dtos;
-using UserAuthentication.Models;
+using FinalVirtualBot.Server.Dtos;
+using FinalVirtualBot.Server.Models;
 
 
-    namespace UserAuthentication.Controllers
-    {
+ namespace FinalVirtualBot.Server.Controllers
+{
         [ApiController]
         [Route("api/v1/authenticate")]
         public class UserAuthenticationController : ControllerBase

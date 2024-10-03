@@ -7,10 +7,10 @@ using System.Linq;
 using System.Collections.Generic;
 using Google.Protobuf.WellKnownTypes;
 using Google.Protobuf.Collections;
-using UserAuthentication.Models;
+using FinalVirtualBot.Server.Models;
 using System;
 
-namespace UserAuthentication.Services
+namespace FinalVirtualBot.Server.Services
 {
     public class DialogflowService : IDialogflowService
     {

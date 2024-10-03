@@ -2,7 +2,7 @@
 
 using MongoDbGenericRepository.Attributes;
 
-namespace UserAuthentication.Models
+namespace FinalVirtualBot.Server.Models
 {
   
         [CollectionName("users")]

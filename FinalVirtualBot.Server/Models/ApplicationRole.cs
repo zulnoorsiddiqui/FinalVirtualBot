@@ -1,7 +1,7 @@
 ﻿using AspNetCore.Identity.MongoDbCore.Models;
 using MongoDbGenericRepository.Attributes;
 
-namespace UserAuthentication.Models
+namespace FinalVirtualBot.Server.Models
 {
    
         [CollectionName("roles")]

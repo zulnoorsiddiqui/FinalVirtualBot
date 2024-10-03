@@ -1,6 +1,6 @@
-﻿using UserAuthentication.Models;
+﻿using FinalVirtualBot.Server.Models;
 
-namespace UserAuthentication.Services
+namespace FinalVirtualBot.Server.Services
 {
     public interface IDialogflowService
     {

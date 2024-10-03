@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserAuthentication.Services;
-using UserAuthentication.Models;
+using FinalVirtualBot.Server.Services;
+using FinalVirtualBot.Server.Models;
 
-namespace UserAuthentication.Controllers
+namespace FinalVirtualBot.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]

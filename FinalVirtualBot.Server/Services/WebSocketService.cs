@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 
-namespace UserAuthentication.Services
+namespace FinalVirtualBot.Server.Services
 {
     public class WebSocketService
     {
